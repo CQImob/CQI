@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – CONQUEST IMOB</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0d1b2e;--mid:#112240;--g:linear-gradient(135deg,#c9a84c 0%,#f5d98b 40%,#e8c15a 60%,#b8922e 100%);--gold:#c9a84c;--w:#e8e0d0;--m:rgba(232,224,208,.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;color:var(--w);background:var(--navy);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:70px;background:rgba(13,27,46,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,.25)}
+.logo{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5rem;letter-spacing:3px;text-decoration:none;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.logo span{display:block;font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:6px;color:var(--gold);-webkit-text-fill-color:var(--gold);text-align:center;opacity:.8}
+.nl{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nl a{font-size:.67rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--m);text-decoration:none;transition:color .25s}
+.nl a:hover,.nl a.active{color:var(--gold)}
+.nc{border:1px solid var(--gold)!important;padding:8px 20px;border-radius:2px;color:var(--gold)!important}
+.nc:hover{background:rgba(201,168,76,.1)!important}
+.hb{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hb span{width:24px;height:1.5px;background:var(--gold)}
+.ph{margin-top:70px;background:var(--mid);padding:3rem 6%;position:relative}
+.ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.35),transparent)}
+.bc2{display:flex;gap:.5rem;align-items:center;margin-bottom:.8rem;font-size:.67rem;color:var(--m);letter-spacing:1px}
+.bc2 a{color:var(--m);text-decoration:none}.bc2 a:hover{color:var(--gold)}
+.ph h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;margin-bottom:.4rem}
+.ph p{color:var(--m);font-size:.82rem;font-weight:300}
+.cw{padding:4.5rem 6%;display:grid;grid-template-columns:1fr 1.6fr;gap:4.5rem;align-items:start}
+.ci h2{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:#fff;margin-bottom:.7rem}
+.ci>p{color:var(--m);font-size:.83rem;line-height:1.85;margin-bottom:2rem;font-weight:300}
+.agent{display:flex;align-items:center;gap:1.2rem;padding:1.4rem 1.5rem;border:1px solid rgba(201,168,76,.45);border-radius:2px;background:rgba(201,168,76,.05);margin-bottom:1.5rem}
+.av{width:50px;height:50px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.an{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#fff}
+.at{font-size:.66rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;opacity:.85}
+.ic{display:flex;align-items:flex-start;gap:1rem;padding:1.15rem 1.3rem;border:1px solid rgba(201,168,76,.25);border-radius:2px;margin-bottom:.85rem;transition:border-color .25s,background .25s;text-decoration:none;color:inherit;background:var(--mid)}
+.ic:hover{border-color:rgba(201,168,76,.6);background:rgba(201,168,76,.04)}
+.ii{width:42px;height:42px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.ic h4{font-size:.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;opacity:.8}
+.ic p{font-size:.9rem;color:var(--w);line-height:1.5}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#1a7a40,#22c55e);color:#fff;padding:13px;border-radius:2px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;margin-top:1.5rem;transition:opacity .2s,transform .2s}
+.wa-btn:hover{opacity:.88;transform:translateY(-2px)}
+.cf{background:var(--mid);padding:2.5rem;border-radius:3px;border:1px solid rgba(201,168,76,.28)}
+.cf h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.cf .sub{font-size:.78rem;color:var(--m);margin-bottom:2rem;font-weight:300}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.fg label{font-size:.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.8}
+.fg input,.fg select,.fg textarea{padding:11px 13px;border:1px solid rgba(201,168,76,.28);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.83rem;color:var(--w);background:var(--navy);outline:none;transition:border-color .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--m)}
+.fg select option{background:#112240}
+.fg textarea{resize:vertical;min-height:110px}
+.btn-s{width:100%;background:var(--g);color:var(--navy);padding:14px;border-radius:2px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;border:none;cursor:pointer;transition:opacity .2s,transform .2s;margin-top:.4rem}
+.btn-s:hover{opacity:.88;transform:translateY(-2px)}
+.ok{display:none;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);border-radius:2px;padding:1rem 1.3rem;margin-top:1rem;font-size:.82rem;color:#86efac;font-weight:500}
+.ok.show{display:block}
+.ms{padding:0 6% 5rem}
+.ml{font-size:.62rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem;opacity:.8}
+.mw{border-radius:3px;overflow:hidden;border:1px solid rgba(201,168,76,.55);box-shadow:0 0 0 3px rgba(201,168,76,.07),0 8px 40px rgba(0,0,0,.5)}
+.mw iframe{display:block;width:100%;height:430px;border:none}
+.map-note{margin-top:1.4rem;font-size:.8rem;color:var(--m);font-weight:300;font-style:italic;letter-spacing:.3px;line-height:1.75;text-align:center}
+footer{background:var(--navy);padding:3.5rem 6% 2rem;border-top:1px solid rgba(201,168,76,.25)}
+.fg2{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+.fl{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.4rem;letter-spacing:3px;text-decoration:none;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fbr p{margin-top:.9rem;font-size:.76rem;color:var(--m);line-height:1.8;font-weight:300}
+footer h4{font-size:.6rem;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;opacity:.75}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.6rem}
+footer ul a{font-size:.77rem;color:var(--m);text-decoration:none;transition:color .2s;font-weight:300}
+footer ul a:hover{color:var(--gold)}
+.fbot{border-top:1px solid rgba(201,168,76,.2);padding-top:1.4rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fbot p{font-size:.7rem;color:rgba(232,224,208,.25);font-weight:300}
+.fwa{position:fixed;bottom:28px;right:28px;z-index:999;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a7a40,#22c55e);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(34,197,94,.4);text-decoration:none;font-size:1.4rem;border:1px solid rgba(255,255,255,.15);animation:wp 3s infinite}
+@keyframes wp{0%,100%{box-shadow:0 4px 20px rgba(34,197,94,.4)}50%{box-shadow:0 4px 32px rgba(34,197,94,.7)}}
+@media(max-width:768px){.nl{display:none;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(13,27,46,.98);padding:1.5rem 6%;gap:1.4rem;border-bottom:1px solid rgba(201,168,76,.25)}.nl.open{display:flex}.hb{display:flex}.cw{grid-template-columns:1fr;gap:2.5rem}.fr{grid-template-columns:1fr}.fg2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">CONQUEST<span>IMOB</span></a>
+  <ul class="nl" id="nav">
+    <li><a href="index.html">Acasă</a></li>
+    <li><a href="proprietati.html">Proprietăți</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="tel:+40721263818" class="nc">📞 Sună acum</a></li>
+  </ul>
+  <div class="hb" onclick="document.getElementById('nav').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="ph">
+  <div class="bc2"><a href="index.html">Acasă</a><span>/</span><span>Contact</span></div>
+  <h1>Contactează-ne</h1>
+  <p>Suntem aici să te ajutăm. Scrie-ne sau sună direct.</p>
+</div>
+
+<div class="cw">
+  <div class="ci">
+    <h2>Hai să vorbim</h2>
+    <p>Indiferent că vrei să cumperi, să vinzi sau vrei o evaluare gratuită — Iulia Alexe îți răspunde rapid și profesionist.</p>
+    <div class="agent">
+      <div class="av">👤</div>
+      <div><div class="an">Iulia Alexe</div><div class="at">Broker imobiliar</div></div>
+    </div>
+    <a href="tel:+40721263818" class="ic">
+      <div class="ii">📞</div>
+      <div><h4>Telefon</h4><p>0721 263 818</p></div>
+    </a>
+    <a href="mailto:cqimob@outlook.com" class="ic">
+      <div class="ii">✉️</div>
+      <div><h4>Email</h4><p>cqimob@outlook.com</p></div>
+    </a>
+    <div class="ic">
+      <div class="ii">🕐</div>
+      <div><h4>Program</h4><p>Luni – Vineri: 9:00 – 18:00<br>Sâmbătă: 10:00 – 14:00</p></div>
+    </div>
+    <a href="https://wa.me/40721263818?text=Buna+ziua" class="wa-btn">💬 Trimite mesaj pe WhatsApp</a>
+  </div>
+
+  <div class="cf">
+    <h3>Trimite un mesaj</h3>
+    <p class="sub">Completează formularul și te contactăm în cel mai scurt timp.</p>
+    <div class="fr">
+      <div class="fg"><label>Nume *</label><input type="text" id="fn" placeholder="Numele tău"></div>
+      <div class="fg"><label>Telefon *</label><input type="tel" id="fp" placeholder="07xx xxx xxx"></div>
+    </div>
+    <div class="fg"><label>Email</label><input type="email" id="fe" placeholder="adresa@email.ro"></div>
+    <div class="fg">
+      <label>Subiect</label>
+      <select id="fs">
+        <option>Vreau să cumpăr o proprietate</option>
+        <option>Vreau să vând o proprietate</option>
+        <option>Vreau să închiriez</option>
+        <option>Evaluare gratuită</option>
+        <option>Altceva</option>
+      </select>
+    </div>
+    <div class="fg"><label>Mesaj</label><textarea id="fm" placeholder="Ce proprietate cauți sau ce întrebări ai..."></textarea></div>
+    <button class="btn-s" onclick="sendForm()">✉️ Trimite mesajul</button>
+    <div class="ok" id="ok">✅ Mesaj trimis! Te contactăm în cel mai scurt timp.</div>
+  </div>
+</div>
+
+<div class="ms">
+  <span class="ml">📍 Locație – Centrul Civic, Brașov</span>
+  <div class="mw">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.4!2d25.5997!3d45.6427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35a5d27b2e0a1%3A0x5a1b2c3d4e5f6789!2sCentrul+Civic%2C+Bra%C8%99ov!5e0!3m2!1sro!2sro!4v1700000000010"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Conquest Imob – Centrul Civic, Brașov">
+    </iframe>
+  </div>
+  <p class="map-note">Vizionările și consultanțele imobiliare se desfășoară exclusiv pe bază de programare telefonică confirmată în prealabil.</p>
+</div>
+
+<footer>
+  <div class="fg2">
+    <div class="fbr">
+      <a href="index.html" class="fl">CONQUEST IMOB</a>
+      <p>Agenție imobiliară premium în Brașov.<br>Iulia Alexe – Broker imobiliar.</p>
+    </div>
+    <div>
+      <h4>Navigare</h4>
+      <ul>
+        <li><a href="index.html">Acasă</a></li>
+        <li><a href="proprietati.html">Proprietăți</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+40721263818">📞 0721 263 818</a></li>
+        <li><a href="https://wa.me/40721263818">💬 WhatsApp</a></li>
+        <li><a href="mailto:cqimob@outlook.com">✉️ cqimob@outlook.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2025 Conquest Imob · Iulia Alexe – Broker imobiliar</p>
+    <p>cqimob@outlook.com</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/40721263818" class="fwa">💬</a>
+
+<script>
+function sendForm(){
+  const n=document.getElementById('fn').value.trim(),p=document.getElementById('fp').value.trim();
+  if(!n||!p){alert('Te rog completează Numele și Telefonul.');return;}
+  document.getElementById('ok').classList.add('show');
+  ['fn','fp','fe','fm'].forEach(id=>document.getElementById(id).value='');
+  setTimeout(()=>document.getElementById('ok').classList.remove('show'),5000);
+}
+</script>
+</body>
+</html>

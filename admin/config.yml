@@ -1,0 +1,89 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: ro
+
+collections:
+  - name: "proprietati"
+    label: "Proprietăți"
+    label_singular: "Proprietate"
+    folder: "_proprietati"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Titlu"
+        name: "titlu"
+        widget: "string"
+        hint: "Ex: Apartament 3 camere – Centrul Vechi"
+
+      - label: "Preț"
+        name: "pret"
+        widget: "string"
+        hint: "Ex: €85.000 sau €600 / lună"
+
+      - label: "Tip tranzacție"
+        name: "tranzactie"
+        widget: "select"
+        options:
+          - { label: "De vânzare", value: "vanzare" }
+          - { label: "De închiriat", value: "inchiriat" }
+
+      - label: "Tip proprietate"
+        name: "tip"
+        widget: "select"
+        options:
+          - { label: "Apartament", value: "apartament" }
+          - { label: "Casă / Vilă", value: "casa" }
+          - { label: "Teren", value: "teren" }
+          - { label: "Spațiu comercial", value: "comercial" }
+
+      - label: "Număr camere"
+        name: "camere"
+        widget: "number"
+        value_type: "int"
+        min: 0
+        max: 20
+        hint: "Lasă 0 pentru terenuri sau spații comerciale"
+
+      - label: "Suprafață (mp)"
+        name: "suprafata"
+        widget: "string"
+        hint: "Ex: 85 mp"
+
+      - label: "Locație"
+        name: "locatie"
+        widget: "string"
+        hint: "Ex: Brașov, Centrul Vechi"
+
+      - label: "Imagine principală"
+        name: "imagine"
+        widget: "image"
+        allow_multiple: false
+
+      - label: "Galerie foto"
+        name: "galerie"
+        widget: "list"
+        allow_add: true
+        field:
+          label: "Fotografie"
+          name: "foto"
+          widget: "image"
+
+      - label: "Descriere"
+        name: "descriere"
+        widget: "markdown"
+        hint: "Descriere completă a proprietății"
+
+      - label: "Featured (proprietate promovată)"
+        name: "featured"
+        widget: "boolean"
+        default: false
+
+      - label: "Disponibil"
+        name: "disponibil"
+        widget: "boolean"
+        default: true
