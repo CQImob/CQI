@@ -1,0 +1,15 @@
+[
+  {
+    "titlu": "Apartament 2 camere – Centrul Vechi Brașov",
+    "pret": "€75.000",
+    "tranzactie": "vanzare",
+    "tip": "apartament",
+    "camere": 2,
+    "suprafata": "58 mp",
+    "locatie": "Brașov, Centrul Vechi",
+    "imagine": "",
+    "descriere": "Apartament luminos, renovat complet, în inima Brașovului.",
+    "featured": true,
+    "disponibil": true
+  }
+]
