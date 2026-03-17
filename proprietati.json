@@ -1,6 +1,19 @@
 {
   "proprietati": [
     {
+      "titlu": "Teren Intravilan 551 mp - PUZ Turistic - Maierus",
+      "pret": "EUR 18.183",
+      "tranzactie": "vanzare",
+      "tip": "teren",
+      "camere": 0,
+      "suprafata": "551 mp",
+      "locatie": "Maierus, jud. Brasov",
+      "imagine": "/images/uploads/1773680892497.png",
+      "descriere": "<a href=\"teren-551mp.html\" style=\"display: block; width: 100%; padding: 12px; background-color: #D4AF37; color: #000; font-weight: bold; text-align: center; text-decoration: none; border-radius: 4px; margin-top: 10px;\">VEZI PREZENTAREA COMPLETĂ ȘI RANDĂRI 3D</a>",
+      "featured": true,
+      "disponibil": true
+    },
+    {
       "titlu": "Teren Intravilan 414 mp - PUZ Turistic - Maierus",
       "pret": "EUR 13.662",
       "tranzactie": "vanzare",
@@ -10,19 +23,6 @@
       "locatie": "Maierus, jud. Brasov",
       "imagine": "/images/uploads/1773680892497.png",
       "descriere": "<a href=\"teren-414mp.html\" style=\"display: block; width: 100%; padding: 12px; background-color: #D4AF37; color: #000; font-weight: bold; text-align: center; text-decoration: none; border-radius: 4px; margin-top: 10px;\">VEZI PREZENTAREA COMPLETĂ ȘI RANDĂRI 3D</a>",
-      "featured": true,
-      "disponibil": true
-    },
-    {
-      "titlu": "Teren Intravilan 551 mp - PUZ Turistic - Maierus",
-      "pret": "EUR 18.183",
-      "tranzactie": "vanzare",
-      "tip": "teren",
-      "camere": 0,
-      "suprafata": "551 mp",
-      "locatie": "Maierus, jud. Brasov",
-      "imagine": "/images/uploads/1773680892497.png",
-      "descriere": "<a href=\"teren-551mp.html\" style=\"display: inline-block; padding: 10px 20px; background-color: #D4AF37; color: black; font-weight: bold; text-decoration: none; border-radius: 5px;\">VEZI PREZENTAREA COMPLETĂ ȘI RANDĂRILE 3D</a>",
       "featured": true,
       "disponibil": true
     }
