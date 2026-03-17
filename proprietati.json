@@ -1,19 +1,6 @@
 {
   "proprietati": [
     {
-      "titlu": "Teren Intravilan 551 mp - PUZ Turistic - Maierus",
-      "pret": "EUR 18.183",
-      "tranzactie": "vanzare",
-      "tip": "teren",
-      "camere": 0,
-      "suprafata": "551 mp",
-      "locatie": "Maierus, jud. Brasov",
-      "imagine": "/images/uploads/1773680892497.png",
-      "descriere": "<a href=\"teren-551mp.html\" style=\"display: block; width: 100%; padding: 12px; background-color: #D4AF37; color: #000; font-weight: bold; text-align: center; text-decoration: none; border-radius: 4px; margin-top: 10px;\">VEZI PREZENTAREA COMPLETĂ ȘI RANDĂRI 3D</a>",
-      "featured": true,
-      "disponibil": true
-    },
-    {
       "titlu": "Teren Intravilan 414 mp - PUZ Turistic - Maierus",
       "pret": "EUR 13.662",
       "tranzactie": "vanzare",
@@ -21,8 +8,21 @@
       "camere": 0,
       "suprafata": "414 mp",
       "locatie": "Maierus, jud. Brasov",
-      "imagine": "/images/uploads/1773680892497.png",
-      "descriere": "<a href=\"teren-414mp.html\" style=\"display: block; width: 100%; padding: 12px; background-color: #D4AF37; color: #000; font-weight: bold; text-align: center; text-decoration: none; border-radius: 4px; margin-top: 10px;\">VEZI PREZENTAREA COMPLETĂ ȘI RANDĂRI 3D</a>",
+      "imagine": "/images/uploads/terenuri maierus 9.jpg",
+      "descriere": "<a href=\"/teren-414mp.html\" style=\"display: block; width: 100%; padding: 14px; background-color: #D4AF37; color: #000; font-weight: bold; text-align: center; text-decoration: none; border-radius: 4px; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;\">Vezi Prezentarea 3D Interactivă</a>",
+      "featured": true,
+      "disponibil": true
+    },
+    {
+      "titlu": "Teren Intravilan 551 mp - PUZ Turistic - Maierus",
+      "pret": "EUR 18.183",
+      "tranzactie": "vanzare",
+      "tip": "teren",
+      "camere": 0,
+      "suprafata": "551 mp",
+      "locatie": "Maierus, jud. Brasov",
+      "imagine": "/images/uploads/terenuri maierus 3.jpg",
+      "descriere": "<a href=\"/teren-551mp.html\" style=\"display: block; width: 100%; padding: 14px; background-color: #D4AF37; color: #000; font-weight: bold; text-align: center; text-decoration: none; border-radius: 4px; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;\">Vezi Prezentarea 3D Interactivă</a>",
       "featured": true,
       "disponibil": true
     }
