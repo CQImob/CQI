@@ -71,7 +71,7 @@ fetch('proprietati.json')
   .then(data=>{
     const grid=document.getElementById('props-grid');
     data.proprietati.filter(p=>p.disponibil).forEach(p=>{
-      grid.innerHTML+=`
+      <a href="teren-${p.suprafata.replace(' ','')}.html" style="text-decoration:none;">
         <div style="background:#112240;border:1px solid rgba(201,168,76,.25);padding:1.5rem;border-radius:4px;">
           <div style="font-size:.6rem;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:.5rem;">${p.tip} · ${p.locatie}</div>
           <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff;margin-bottom:.8rem;">${p.titlu}</h2>
