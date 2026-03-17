@@ -1,17 +1,30 @@
 {
   "proprietati": [
     {
-      "titlu": "Teren Intravilan 551 mp · PUZ Turistic · Măieruș",
+      "titlu": "Teren Intravilan 551 mp - PUZ Turistic - Maierus",
       "pret": "EUR 18.183",
       "tranzactie": "vanzare",
       "tip": "teren",
       "camere": 0,
       "suprafata": "551 mp",
-      "locatie": "Măieruș, jud. Brașov",
+      "locatie": "Maierus, jud. Brasov",
       "imagine": "",
-      "descriere": "Teren intravilan 551 mp, PUZ Turistic aprobat, ideal pensiune sau cabană de vacanță. Acces DN13, utilități în zonă. Reprezentare exclusivă Conquest Imob.",
+      "descriere": "Teren intravilan 551 mp, PUZ Turistic aprobat, ideal pensiune sau cabana de vacanta. Acces DN13, utilitati in zona. Reprezentare exclusiva Conquest Imob.",
       "featured": true,
       "disponibil": true
     },
     {
-      "titlu": "Teren Intravilan
+      "titlu": "Teren Intravilan 414 mp - PUZ Turistic - Maierus",
+      "pret": "EUR 13.662",
+      "tranzactie": "vanzare",
+      "tip": "teren",
+      "camere": 0,
+      "suprafata": "414 mp",
+      "locatie": "Maierus, jud. Brasov",
+      "imagine": "",
+      "descriere": "Teren intravilan 414 mp, PUZ Turistic aprobat, ideal pensiune sau cabana de vacanta. Acces DN13, utilitati in zona. Reprezentare exclusiva Conquest Imob.",
+      "featured": true,
+      "disponibil": true
+    }
+  ]
+}
