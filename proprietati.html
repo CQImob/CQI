@@ -61,7 +61,29 @@ footer ul a:hover{color:var(--gold)}
   <p>Brașov și împrejurimi</p>
 </div>
 
-<div class="main"></div>
+<div class="main" id="main">
+  <div id="props-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;"></div>
+</div>
+
+<script>
+fetch('proprietati.json')
+  .then(r=>r.json())
+  .then(data=>{
+    const grid=document.getElementById('props-grid');
+    data.proprietati.filter(p=>p.disponibil).forEach(p=>{
+      grid.innerHTML+=`
+        <div style="background:#112240;border:1px solid rgba(201,168,76,.25);padding:1.5rem;border-radius:4px;">
+          <div style="font-size:.6rem;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:.5rem;">${p.tip} · ${p.locatie}</div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff;margin-bottom:.8rem;">${p.titlu}</h2>
+          <div style="font-size:.75rem;color:rgba(232,224,208,.6);margin-bottom:1rem;line-height:1.7;">${p.descriere}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(201,168,76,.2);padding-top:1rem;margin-top:.5rem;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#c9a84c;">${p.pret}</div>
+            <div style="font-size:.7rem;color:rgba(232,224,208,.5);">${p.suprafata}</div>
+          </div>
+        </div>`;
+    });
+  });
+</script>
 
 <footer>
   <div class="fg2">
