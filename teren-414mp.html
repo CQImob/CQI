@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teren 414 mp - PUZ Turistic - Maierus | CONQUEST IMOB</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 :root{--navy:#0d1b2e;--mid:#112240;--g:linear-gradient(135deg,#c9a84c 0%,#f5d98b 40%,#e8c15a 60%,#b8922e 100%);--gold:#c9a84c;--w:#e8e0d0;--m:rgba(232,224,208,.5)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -31,11 +30,10 @@ h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.6rem);col
 @media(max-width:768px){.content{grid-template-columns:1fr}.nl{display:none}}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(201,168,76,.3)}
 .desc{font-size:.82rem;color:var(--m);line-height:1.9}
-.render-box{width:100%;border:1px solid rgba(201,168,76,.2);position:relative;overflow:hidden;border-radius:4px}
-canvas{width:100%!important;display:block}
-.rlabel{position:absolute;bottom:10px;left:12px;font-size:7px;letter-spacing:2px;color:rgba(201,168,76,.6);text-transform:uppercase;pointer-events:none}
-.rhint{position:absolute;top:10px;right:12px;font-size:7px;color:rgba(232,224,208,.3);pointer-events:none}
-.ortofoto{width:100%;border-radius:4px;border:1px solid rgba(201,168,76,.2);margin-top:1.5rem}
+.render-box{width:100%;height:320px;border:1px solid rgba(201,168,76,.2);position:relative;overflow:hidden;border-radius:4px;background:#182810}
+.render-box canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important;display:block}
+.rlabel{position:absolute;bottom:10px;left:12px;font-size:7px;letter-spacing:2px;color:rgba(201,168,76,.6);text-transform:uppercase;pointer-events:none;z-index:2}
+.rhint{position:absolute;top:10px;right:12px;font-size:7px;color:rgba(232,224,208,.3);pointer-events:none;z-index:2}
 .cta-box{background:var(--mid);border:1px solid rgba(201,168,76,.3);padding:2rem;margin:0 6% 3rem;text-align:center}
 .cta-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;margin-bottom:1rem}
 .cta-btn{display:inline-block;background:var(--g);color:#0d1b2e;font-weight:700;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:14px 32px;text-decoration:none;margin:0 .5rem}
@@ -45,6 +43,7 @@ footer{background:var(--navy);padding:2rem 6%;border-top:1px solid rgba(201,168,
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="logo">CONQUEST<span>IMOB</span></a>
   <ul class="nl">
@@ -91,16 +90,15 @@ footer{background:var(--navy);padding:2rem 6%;border-top:1px solid rgba(201,168,
       ✓ Materiale admise: beton-armat, BCA, caramida, lemn<br>
       ✓ Acoperis: sarpanta cu tigla ceramica
     </div>
-    <img src="images/uploads/ortofoto-maierus.png" class="ortofoto" onerror="this.style.display='none'" alt="Ortofoto teren Maierus">
   </div>
   <div>
     <div class="section-title">Randare conceptuala · Cabana Rustica</div>
-    <div class="render-box">
+    <div class="render-box" id="rb">
       <canvas id="c"></canvas>
       <div class="rlabel">414 mp · P+1+M · Cabana rustica</div>
       <div class="rhint">↔ Rotire</div>
     </div>
-    <div style="font-size:.7rem;color:rgba(232,224,208,.3);margin-top:.5rem;line-height:1.6">* Randare conceptuala ilustrativa · respecta indicatorii din CU · nu reprezinta proiect de arhitectura</div>
+    <div style="font-size:.7rem;color:rgba(232,224,208,.3);margin-top:.5rem">* Randare conceptuala · respecta indicatorii din CU</div>
   </div>
 </div>
 
@@ -111,62 +109,159 @@ footer{background:var(--navy);padding:2rem 6%;border-top:1px solid rgba(201,168,
   <a href="contact.html" class="cta-btn" style="background:transparent;border:1px solid var(--gold);color:var(--gold)">Trimite mesaj</a>
 </div>
 
-<footer>
-  © 2025 Conquest Imob · Iulia Alexe – Broker imobiliar · 0721 263 818 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bddeccd4d0d2dffdd2c8c9d1d2d2d693ded2d0">[email&#160;protected]</a>
-</footer>
-
+<footer>© 2025 Conquest Imob · Iulia Alexe – Broker imobiliar · 0721 263 818</footer>
 <a href="https://wa.me/40721263818" class="fwa">💬</a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const canvas=document.getElementById('c');
-const W=()=>Math.max(300,canvas.parentElement.clientWidth||300);
-const H=()=>Math.max(200,Math.min(280,W()*0.45));
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-renderer.shadowMap.enabled=true;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;
-const scene=new THREE.Scene();scene.background=new THREE.Color(0x182810);scene.fog=new THREE.FogExp2(0x182810,0.014);
-const camera=new THREE.PerspectiveCamera(42,W()/H(),0.1,200);
-function resize(){renderer.setSize(W(),H());camera.aspect=W()/H();camera.updateProjectionMatrix();}
-window.addEventListener('resize',resize);window.addEventListener('load',()=>{resize();updCam();});
-scene.add(new THREE.AmbientLight(0xfff0dd,0.5));
-const sun=new THREE.DirectionalLight(0xfffae8,2.2);sun.position.set(14,20,12);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
-scene.add(new THREE.DirectionalLight(0x8899bb,0.35)).position.set(-8,6,-8);
-function ml(c,t,o){const m=new THREE.MeshLambertMaterial({color:c});if(t){m.transparent=true;m.opacity=o||0.4;}return m;}
-function bx(w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m;}
-const mPl=ml(0xC8A870),mPlD=ml(0xB09458),mWood=ml(0x5C3218),mWoodL=ml(0x7A4828),mRoof=ml(0x8B3A1A),mRoofD=ml(0x6A2810),mGl=ml(0xBBDDEE,true,0.45),mSt=ml(0x9A8870),mFen=ml(0x6B4A2A),mGr=ml(0x304820);
-const gr=new THREE.Mesh(new THREE.PlaneGeometry(26,20),mGr);gr.rotation.x=-Math.PI/2;gr.receiveShadow=true;scene.add(gr);
-bx(8.5,0.55,6.2,mSt,0,0.28,0);bx(8.5,3.0,6.2,mPl,0,2.05,0);bx(2.5,3.0,6.2,mSt,-3.0,2.05,0);
-bx(2.2,1.8,0.08,mGl,-1.0,2.2,3.12);bx(1.2,1.2,0.08,mGl,3.0,2.0,3.12);
-bx(1.0,2.3,0.15,mWood,0,1.25,3.16);
-bx(5.5,0.14,2.2,mWoodL,0,0.07,4.0);
-[-2.5,0,2.5].forEach(x=>bx(0.18,2.8,0.18,mWood,x,1.47,5.0));
-bx(5.5,0.18,0.18,mWood,0,2.95,5.0);
-for(let i=-2.4;i<=2.5;i+=0.4)bx(0.08,0.9,0.08,mWoodL,i,0.55,5.0);
-bx(5.5,0.08,0.08,mWood,0,0.98,5.0);
-bx(8.5,2.5,6.2,mPl,0,4.75,0);bx(2.5,2.5,6.2,mSt,-3.0,4.75,0);
-bx(1.8,1.4,0.08,mGl,-2.0,4.75,3.12);bx(1.8,1.4,0.08,mGl,1.8,4.75,3.12);
-bx(5.5,0.12,1.4,mWoodL,0,6.1,3.6);
-for(let i=-2.4;i<=2.5;i+=0.4)bx(0.08,0.75,0.08,mWoodL,i,6.47,4.25);
-bx(5.5,0.08,0.08,mWood,0,6.83,4.25);
-bx(7.0,1.6,5.2,mPlD,0,7.55,-0.2);bx(1.6,0.9,0.08,mGl,0,7.55,2.72);
-const rg=new THREE.Mesh(new THREE.CylinderGeometry(0,5.8,3.2,4),mRoof);rg.position.set(0,9.65,0);rg.rotation.y=Math.PI/4;rg.castShadow=true;scene.add(rg);
-bx(9.2,0.2,7.0,mRoofD,0,8.1,0);
-bx(0.6,1.8,0.6,mSt,1.8,10.2,-0.4);bx(0.75,0.12,0.75,mPl,1.8,11.15,-0.4);
-for(let i=-10;i<=10;i+=2.0)bx(0.12,0.9,0.12,mFen,i,0.45,9.5);
-[0.25,0.55,0.82].forEach(y=>bx(20,0.06,0.06,mFen,0,y,9.5));
-function tree(x,z,s){
-  const tk=new THREE.Mesh(new THREE.CylinderGeometry(0.08*s,0.13*s,1.1*s,6),ml(0x4A2A0A));tk.position.set(x,0.55*s,z);scene.add(tk);
-  [[1.8,0.82,0x1A5212],[1.25,0.70,0x206618],[0.72,0.56,0x287A1E]].forEach(([y,r,c])=>{const f=new THREE.Mesh(new THREE.ConeGeometry(r*s,0.80*s,7),ml(c));f.position.set(x,y*s,z);scene.add(f);});
+<script>
+function loadThree(callback) {
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
+  s.onload = function() { setTimeout(callback, 500); };
+  s.onerror = function() {
+    var s2 = document.createElement('script');
+    s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    s2.onload = function() { setTimeout(callback, 500); };
+    document.head.appendChild(s2);
+  };
+  document.head.appendChild(s);
 }
-[[-8,5],[-8,-3],[7,-4],[8,3],[4,-6],[-4,7],[3,6]].forEach(([x,z])=>tree(x,z,0.65+Math.random()*0.5));
-let az=0.5,pol=0.42,rad=20,drag=false,px=0,py=0;
-const tgt=new THREE.Vector3(0,3.5,0);
-function updCam(){camera.position.x=tgt.x+rad*Math.sin(pol)*Math.sin(az);camera.position.y=tgt.y+rad*Math.cos(pol);camera.position.z=tgt.z+rad*Math.sin(pol)*Math.cos(az);camera.lookAt(tgt);}
-updCam();
-canvas.addEventListener('mousedown',e=>{drag=true;px=e.clientX;py=e.clientY;});
-canvas.addEventListener('touchstart',e=>{drag=true;px=e.touches[0].clientX;py=e.touches[0].clientY;},{passive:true});
-window.addEventListener('mouseup',()=>drag=false);window.addEventListener('touchend',()=>drag=false);
-canvas.addEventListener('mousemove',e=>{if(!drag)return;az-=(e.clientX-px)*0.008;pol=Math.max(0.1,Math.min(1.4,pol-(e.clientY-py)*0.006));px=e.clientX;py=e.clientY;updCam();});
-canvas.addEventListener('touchmove',e=>{if(!drag)return;az-=(e.touches[0].clientX-px)*0.008;pol=Math.max(0.1,Math.min(1.4,pol-(e.touches[0].clien
-function animate(){requestAnimationFrame(animate);az+=0.003;updCam();renderer.render(scene,camera);}
-animate();
+
+function initScene() {
+  var rb = document.getElementById('rb');
+  var canvas = document.getElementById('c');
+  if (!rb || !canvas || typeof THREE === 'undefined') return;
+
+  var W = rb.offsetWidth || 400;
+  var H = 320;
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x182810);
+  scene.fog = new THREE.FogExp2(0x182810, 0.014);
+
+  var camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 200);
+
+  scene.add(new THREE.AmbientLight(0xfff0dd, 0.5));
+  var sun = new THREE.DirectionalLight(0xfffae8, 2.2);
+  sun.position.set(14, 20, 12);
+  sun.castShadow = true;
+  scene.add(sun);
+
+  function ml(c) { return new THREE.MeshLambertMaterial({ color: c }); }
+  function mlT(c, o) { return new THREE.MeshLambertMaterial({ color: c, transparent: true, opacity: o }); }
+  function bx(w, h, d, mat, x, y, z) {
+    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+    m.position.set(x, y, z);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    scene.add(m);
+    return m;
+  }
+
+  var mPl = ml(0xC8A870), mPlD = ml(0xB09458), mWood = ml(0x5C3218), mWoodL = ml(0x7A4828);
+  var mRoof = ml(0x8B3A1A), mRoofD = ml(0x6A2810), mGl = mlT(0xBBDDEE, 0.45);
+  var mSt = ml(0x9A8870), mGr = ml(0x304820);
+
+  var gr = new THREE.Mesh(new THREE.PlaneGeometry(26, 20), mGr);
+  gr.rotation.x = -Math.PI / 2;
+  gr.receiveShadow = true;
+  scene.add(gr);
+
+  bx(8.5, 0.55, 6.2, mSt, 0, 0.28, 0);
+  bx(8.5, 3.0, 6.2, mPl, 0, 2.05, 0);
+  bx(2.5, 3.0, 6.2, mSt, -3.0, 2.05, 0);
+  bx(2.2, 1.8, 0.08, mGl, -1.0, 2.2, 3.12);
+  bx(1.2, 1.2, 0.08, mGl, 3.0, 2.0, 3.12);
+  bx(1.0, 2.3, 0.15, mWood, 0, 1.25, 3.16);
+  bx(5.5, 0.14, 2.2, mWoodL, 0, 0.07, 4.0);
+  [-2.5, 0, 2.5].forEach(function(x) { bx(0.18, 2.8, 0.18, mWood, x, 1.47, 5.0); });
+  bx(5.5, 0.18, 0.18, mWood, 0, 2.95, 5.0);
+  bx(8.5, 2.5, 6.2, mPl, 0, 4.75, 0);
+  bx(2.5, 2.5, 6.2, mSt, -3.0, 4.75, 0);
+  bx(1.8, 1.4, 0.08, mGl, -2.0, 4.75, 3.12);
+  bx(1.8, 1.4, 0.08, mGl, 1.8, 4.75, 3.12);
+  bx(5.5, 0.12, 1.4, mWoodL, 0, 6.1, 3.6);
+  bx(7.0, 1.6, 5.2, mPlD, 0, 7.55, -0.2);
+  var rg = new THREE.Mesh(new THREE.CylinderGeometry(0, 5.8, 3.2, 4), mRoof);
+  rg.position.set(0, 9.65, 0);
+  rg.rotation.y = Math.PI / 4;
+  rg.castShadow = true;
+  scene.add(rg);
+  bx(9.2, 0.2, 7.0, mRoofD, 0, 8.1, 0);
+  bx(0.6, 1.8, 0.6, mSt, 1.8, 10.2, -0.4);
+
+  function tree(x, z, s) {
+    var tk = new THREE.Mesh(new THREE.CylinderGeometry(0.08 * s, 0.13 * s, 1.1 * s, 6), ml(0x4A2A0A));
+    tk.position.set(x, 0.55 * s, z);
+    scene.add(tk);
+    [[1.8, 0.82, 0x1A5212], [1.25, 0.70, 0x206618], [0.72, 0.56, 0x287A1E]].forEach(function(a) {
+      var f = new THREE.Mesh(new THREE.ConeGeometry(a[1] * s, 0.80 * s, 7), ml(a[2]));
+      f.position.set(x, a[0] * s, z);
+      scene.add(f);
+    });
+  }
+  [[-8, 5], [-8, -3], [7, -4], [8, 3], [4, -6], [-4, 7], [3, 6]].forEach(function(a) {
+    tree(a[0], a[1], 0.7);
+  });
+
+  var az = 0.5, pol = 0.42, rad = 20, drag = false, px = 0, py = 0;
+  var tgt = new THREE.Vector3(0, 3.5, 0);
+
+  function updCam() {
+    camera.position.x = tgt.x + rad * Math.sin(pol) * Math.sin(az);
+    camera.position.y = tgt.y + rad * Math.cos(pol);
+    camera.position.z = tgt.z + rad * Math.sin(pol) * Math.cos(az);
+    camera.lookAt(tgt);
+  }
+  updCam();
+
+  canvas.addEventListener('mousedown', function(e) { drag = true; px = e.clientX; py = e.clientY; });
+  canvas.addEventListener('touchstart', function(e) { drag = true; px = e.touches[0].clientX; py = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('mouseup', function() { drag = false; });
+  window.addEventListener('touchend', function() { drag = false; });
+  canvas.addEventListener('mousemove', function(e) {
+    if (!drag) return;
+    az -= (e.clientX - px) * 0.008;
+    pol = Math.max(0.1, Math.min(1.4, pol - (e.clientY - py) * 0.006));
+    px = e.clientX; py = e.clientY; updCam();
+  });
+  canvas.addEventListener('touchmove', function(e) {
+    if (!drag) return;
+    az -= (e.touches[0].clientX - px) * 0.008;
+    pol = Math.max(0.1, Math.min(1.4, pol - (e.touches[0].clientY - py) * 0.006));
+    px = e.touches[0].clientX; py = e.touches[0].clientY; updCam();
+  }, { passive: true });
+
+  window.addEventListener('resize', function() {
+    W = rb.offsetWidth || 400;
+    renderer.setSize(W, H);
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    az += 0.003;
+    updCam();
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+
+window.onload = function() {
+  loadThree(initScene);
+};
+</script>
+</body>
+</html>
+
+
+
+--
+Sent from Gmail Mobile
