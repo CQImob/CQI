@@ -119,7 +119,7 @@ footer{background:var(--navy);padding:2rem 6%;border-top:1px solid rgba(201,168,
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const canvas=document.getElementById('c');
-const W=()=>canvas.parentElement.clientWidth;
+const W=()=>Math.max(300,canvas.parentElement.clientWidth||300);
 const H=()=>Math.max(200,Math.min(280,W()*0.45));
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
