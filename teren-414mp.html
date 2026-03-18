@@ -127,7 +127,7 @@ renderer.shadowMap.enabled=true;renderer.toneMapping=THREE.ACESFilmicToneMapping
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x182810);scene.fog=new THREE.FogExp2(0x182810,0.014);
 const camera=new THREE.PerspectiveCamera(42,W()/H(),0.1,200);
 function resize(){renderer.setSize(W(),H());camera.aspect=W()/H();camera.updateProjectionMatrix();}
-resize();window.addEventListener('resize',resize);
+window.addEventListener('resize',resize);window.addEventListener('load',()=>{resize();updCam();});
 scene.add(new THREE.AmbientLight(0xfff0dd,0.5));
 const sun=new THREE.DirectionalLight(0xfffae8,2.2);sun.position.set(14,20,12);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
 scene.add(new THREE.DirectionalLight(0x8899bb,0.35)).position.set(-8,6,-8);
