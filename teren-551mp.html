@@ -157,3 +157,5 @@ canvas.addEventListener('touchstart',e=>{drag=true;px=e.touches[0].clientX;py=e.
 window.addEventListener('mouseup',()=>drag=false);window.addEventListener('touchend',()=>drag=false);
 canvas.addEventListener('mousemove',e=>{if(!drag)return;az-=(e.clientX-px)*0.008;pol=Math.max(0.1,Math.min(1.4,pol-(e.clientY-py)*0.006));px=e.clientX;py=e.clientY;updCam();});
 canvas.addEventListener('touchmove',e=>{if(!drag)return;az-=(e.touches[0].clientX-px)*0.008;pol=Math.max(0.1,Math.min(1.4,pol-(e.touches[0].clien
+function animate(){requestAnimationFrame(animate);az+=0.003;updCam();renderer.render(scene,camera);}
+animate();
