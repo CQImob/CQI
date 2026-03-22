@@ -78,7 +78,7 @@ footer ul a:hover{color:var(--gold)}
 function makeCarousel(photos, mainImg) {
   const all = [];
   if(mainImg) all.push(mainImg);
-  if(photos && photos.length) photos.forEach(p => { if(p.poza) all.push(p.poza); });
+  if(photos && photos.length) photos.forEach(p => { all.push(typeof p === 'string' ? p : p.poza); });
   if(all.length === 0) return '';
   if(all.length === 1) return `<img src="${all[0]}" style="width:100%;height:200px;object-fit:cover;border-radius:4px;margin-bottom:1rem;">`;
   
