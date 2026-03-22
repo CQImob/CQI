@@ -11,7 +11,7 @@ collections:
     label: "Proprietăți"
     label_singular: "Proprietate"
     files:
-      - label: "Lista proprietăți"
+      - label: "Lista proprietăților"
         name: "proprietati"
         file: "proprietati.json"
         fields:
@@ -23,40 +23,31 @@ collections:
               - label: "Titlu"
                 name: "titlu"
                 widget: "string"
-                hint: "Ex: Apartament 3 camere – Centrul Vechi"
-              - label: "Preț"
+              - label: "Pret"
                 name: "pret"
                 widget: "string"
-                hint: "Ex: €85.000 sau €600 / lună"
-              - label: "Tip tranzacție"
-                name: "tranzactie"
+              - label: "Tip tranzactie"
+                name: "tip_tranzactie"
                 widget: "select"
-                options:
-                  - { label: "De vânzare", value: "vanzare" }
-                  - { label: "De închiriat", value: "inchiriat" }
+                options: ["De vânzare", "De închiriat"]
               - label: "Tip proprietate"
-                name: "tip"
+                name: "tip_proprietate"
                 widget: "select"
-                options:
-                  - { label: "Apartament", value: "apartament" }
-                  - { label: "Casă / Vilă", value: "casa" }
-                  - { label: "Teren", value: "teren" }
-                  - { label: "Spațiu comercial", value: "comercial" }
+                options: ["Apartament", "Casa", "Teren", "Spatiu comercial"]
               - label: "Număr camere"
                 name: "camere"
                 widget: "number"
-                value_type: "int"
                 min: 0
                 max: 20
                 default: 0
-              - label: "Suprafață"
+              - label: "Suprafată"
                 name: "suprafata"
                 widget: "string"
                 hint: "Ex: 85 mp"
-              - label: "Locație"
+              - label: "Locatie"
                 name: "locatie"
                 widget: "string"
-                hint: "Ex: Brașov, Centrul Vechi"
+                hint: "Ex: Brasov, Centrul Vechi"
               - label: "Imagine principală"
                 name: "imagine"
                 widget: "image"
@@ -66,10 +57,10 @@ collections:
                 widget: "list"
                 required: false
                 label_singular: "Fotografie"
-                fields:
-              - label: "Fotografie"
-                name: "poza"
-                widget: "image"
+                field:
+                  label: "Fotografie"
+                  name: "poza"
+                  widget: "image"
               - label: "Descriere"
                 name: "descriere"
                 widget: "text"
