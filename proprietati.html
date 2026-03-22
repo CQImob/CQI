@@ -35,6 +35,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer}
 .dot.active{background:#fff}
+.prop-card{background:#112240;border:1px solid rgba(201,168,76,.25);padding:1.5rem;border-radius:4px;cursor:pointer;}
 footer{background:var(--navy);padding:3.5rem 6% 2rem;border-top:1px solid rgba(201,168,76,.25)}
 .fg2{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
 .fl{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.4rem;letter-spacing:3px;text-decoration:none;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -52,7 +53,6 @@ footer ul a:hover{color:var(--gold)}
 </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="logo">CONQUEST<span>IMOB</span></a>
   <ul class="nl" id="nav">
@@ -63,73 +63,90 @@ footer ul a:hover{color:var(--gold)}
   </ul>
   <div class="hb" onclick="document.getElementById('nav').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
-
 <div class="ph">
   <div class="bc2"><a href="index.html">Acasă</a><span>/</span><span>Proprietăți</span></div>
   <h1>Proprietăți</h1>
   <p>Brașov și împrejurimi</p>
 </div>
-
 <div class="main" id="main">
   <div id="props-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;"></div>
 </div>
-
 <script>
-function makeCarousel(photos, mainImg) {
-  const all = [];
+var carousels = {};
+
+function makeCarousel(photos, mainImg, cardId) {
+  var all = [];
   if(mainImg) all.push(mainImg);
-  if(photos && photos.length) photos.forEach(p => { all.push(typeof p === 'string' ? p : p.poza); });
+  if(photos && photos.length) {
+    for(var i=0;i<photos.length;i++){
+      var p = photos[i];
+      all.push(typeof p === 'string' ? p : p.poza);
+    }
+  }
   if(all.length === 0) return '';
-  if(all.length === 1) return `<img src="${all[0]}" style="width:100%;height:200px;object-fit:cover;border-radius:4px;margin-bottom:1rem;">`;
+  if(all.length === 1) return '<img src="'+all[0]+'" style="width:100%;height:200px;object-fit:cover;border-radius:4px;margin-bottom:1rem;">';
   
-  const id = 'c' + Math.random().toString(36).substr(2,6);
-  const imgs = all.map((s,i) => `<img src="${s}" class="${i===0?'active':''}">`).join('');
-  const dots = all.map((_,i) => `<div class="dot${i===0?' active':''}" onclick="goTo('${id}',${i})"></div>`).join('');
-  return `<div class="carousel" id="${id}">${imgs}<button class="carousel-btn prev" onclick="move('${id}',-1)">&#8249;</button><button class="carousel-btn next" onclick="move('${id}',1)">&#8250;</button><div class="dots">${dots}</div></div>`;
+  carousels[cardId] = {imgs: all, cur: 0};
+  
+  var html = '<div class="carousel" id="car_'+cardId+'" onclick="stopIt(event)">';
+  for(var j=0;j<all.length;j++){
+    html += '<img src="'+all[j]+'" id="img_'+cardId+'_'+j+'" '+(j===0?'class="active"':'')+' >';
+  }
+  html += '<button class="carousel-btn prev" onclick="stopIt(event);moveC(\''+cardId+'\',-1)">&#8249;</button>';
+  html += '<button class="carousel-btn next" onclick="stopIt(event);moveC(\''+cardId+'\',1)">&#8250;</button>';
+  html += '<div class="dots">';
+  for(var k=0;k<all.length;k++){
+    html += '<div class="dot'+(k===0?' active':'')+'" id="dot_'+cardId+'_'+k+'" onclick="stopIt(event);goToC(\''+cardId+'\','+k+')"></div>';
+  }
+  html += '</div></div>';
+  return html;
 }
 
-function move(id, dir) {
-  const c = document.getElementById(id);
-  const imgs = c.querySelectorAll('img');
-  const dots = c.querySelectorAll('.dot');
-  let cur = [...imgs].findIndex(i => i.classList.contains('active'));
-  imgs[cur].classList.remove('active');
-  dots[cur].classList.remove('active');
-  cur = (cur + dir + imgs.length) % imgs.length;
-  imgs[cur].classList.add('active');
-  dots[cur].classList.add('active');
+function stopIt(e) {
+  e.stopPropagation();
 }
 
-function goTo(id, idx) {
-  const c = document.getElementById(id);
-  const imgs = c.querySelectorAll('img');
-  const dots = c.querySelectorAll('.dot');
-  imgs.forEach(i => i.classList.remove('active'));
-  dots.forEach(d => d.classList.remove('active'));
-  imgs[idx].classList.add('active');
-  dots[idx].classList.add('active');
+function moveC(id, dir) {
+  var c = carousels[id];
+  document.getElementById('img_'+id+'_'+c.cur).classList.remove('active');
+  document.getElementById('dot_'+id+'_'+c.cur).classList.remove('active');
+  c.cur = (c.cur + dir + c.imgs.length) % c.imgs.length;
+  document.getElementById('img_'+id+'_'+c.cur).classList.add('active');
+  document.getElementById('dot_'+id+'_'+c.cur).classList.add('active');
+}
+
+function goToC(id, idx) {
+  var c = carousels[id];
+  document.getElementById('img_'+id+'_'+c.cur).classList.remove('active');
+  document.getElementById('dot_'+id+'_'+c.cur).classList.remove('active');
+  c.cur = idx;
+  document.getElementById('img_'+id+'_'+c.cur).classList.add('active');
+  document.getElementById('dot_'+id+'_'+c.cur).classList.add('active');
 }
 
 fetch('proprietati.json')
-  .then(r=>r.json())
-  .then(data=>{
-    const grid=document.getElementById('props-grid');
-    data.proprietati.filter(p=>p.disponibil).forEach(p=>{
-      grid.innerHTML+=`
-        <div onclick="window.location='contact.html'" style="background:#112240;border:1px solid rgba(201,168,76,.25);padding:1.5rem;border-radius:4px;cursor:pointer;">
-          <div style="font-size:.6rem;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:.5rem;">${p.tip_proprietate} · ${p.locatie}</div>
-          <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff;margin-bottom:.8rem;">${p.titlu}</h2>
-          ${makeCarousel(p.galerie, p.imagine)}
-          <div style="font-size:.75rem;color:rgba(232,224,208,.6);margin-bottom:1rem;line-height:1.7;">${p.descriere}</div>
-          <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(201,168,76,.2);padding-top:1rem;margin-top:.5rem;">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#c9a84c;">${p.pret}</div>
-            <div style="font-size:.7rem;color:rgba(232,224,208,.5);">${p.suprafata}</div>
-          </div>
-        </div>`;
-    });
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var grid = document.getElementById('props-grid');
+    var props = data.proprietati.filter(function(p){ return p.disponibil; });
+    for(var i=0;i<props.length;i++){
+      var p = props[i];
+      var cardId = 'p'+i;
+      var div = document.createElement('div');
+      div.className = 'prop-card';
+      div.setAttribute('onclick', "window.location='contact.html'");
+      div.innerHTML =
+        '<div style="font-size:.6rem;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:.5rem;">'+p.tip_proprietate+' &middot; '+p.locatie+'</div>'+
+        '<h2 style="font-family:\'Cormorant Garamond\',serif;font-size:1.3rem;color:#fff;margin-bottom:.8rem;">'+p.titlu+'</h2>'+
+        makeCarousel(p.galerie, p.imagine, cardId)+
+        '<div style="font-size:.75rem;color:rgba(232,224,208,.6);margin-bottom:1rem;line-height:1.7;">'+p.descriere+'</div>'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(201,168,76,.2);padding-top:1rem;margin-top:.5rem;">'+
+        '<div style="font-family:\'Cormorant Garamond\',serif;font-size:1.4rem;color:#c9a84c;">'+p.pret+'</div>'+
+        '<div style="font-size:.7rem;color:rgba(232,224,208,.5);">'+p.suprafata+'</div></div>';
+      grid.appendChild(div);
+    }
   });
 </script>
-
 <footer>
   <div class="fg2">
     <div class="fbr">
@@ -158,7 +175,7 @@ fetch('proprietati.json')
     <p>cqimob@outlook.com</p>
   </div>
 </footer>
-
 <a href="https://wa.me/40721263818" class="fwa">💬</a>
 </body>
 </html>
+
