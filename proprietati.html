@@ -26,6 +26,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .ph h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;margin-bottom:.4rem}
 .ph p{color:var(--m);font-size:.82rem;font-weight:300}
 .main{flex:1;padding:5rem 6%}
+.carousel{position:relative;width:100%;height:200px;margin-bottom:1rem;border-radius:4px;overflow:hidden}
+.carousel img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.carousel img.active{opacity:1}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);color:#fff;border:none;padding:8px 12px;cursor:pointer;z-index:2;font-size:1rem}
+.carousel-btn.prev{left:0}
+.carousel-btn.next{right:0}
+.dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer}
+.dot.active{background:#fff}
 footer{background:var(--navy);padding:3.5rem 6% 2rem;border-top:1px solid rgba(201,168,76,.25)}
 .fg2{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
 .fl{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.4rem;letter-spacing:3px;text-decoration:none;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -66,6 +75,41 @@ footer ul a:hover{color:var(--gold)}
 </div>
 
 <script>
+function makeCarousel(photos, mainImg) {
+  const all = [];
+  if(mainImg) all.push(mainImg);
+  if(photos && photos.length) photos.forEach(p => { if(p.poza) all.push(p.poza); });
+  if(all.length === 0) return '';
+  if(all.length === 1) return `<img src="${all[0]}" style="width:100%;height:200px;object-fit:cover;border-radius:4px;margin-bottom:1rem;">`;
+  
+  const id = 'c' + Math.random().toString(36).substr(2,6);
+  const imgs = all.map((s,i) => `<img src="${s}" class="${i===0?'active':''}">`).join('');
+  const dots = all.map((_,i) => `<div class="dot${i===0?' active':''}" onclick="goTo('${id}',${i})"></div>`).join('');
+  return `<div class="carousel" id="${id}">${imgs}<button class="carousel-btn prev" onclick="move('${id}',-1)">&#8249;</button><button class="carousel-btn next" onclick="move('${id}',1)">&#8250;</button><div class="dots">${dots}</div></div>`;
+}
+
+function move(id, dir) {
+  const c = document.getElementById(id);
+  const imgs = c.querySelectorAll('img');
+  const dots = c.querySelectorAll('.dot');
+  let cur = [...imgs].findIndex(i => i.classList.contains('active'));
+  imgs[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur = (cur + dir + imgs.length) % imgs.length;
+  imgs[cur].classList.add('active');
+  dots[cur].classList.add('active');
+}
+
+function goTo(id, idx) {
+  const c = document.getElementById(id);
+  const imgs = c.querySelectorAll('img');
+  const dots = c.querySelectorAll('.dot');
+  imgs.forEach(i => i.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  imgs[idx].classList.add('active');
+  dots[idx].classList.add('active');
+}
+
 fetch('proprietati.json')
   .then(r=>r.json())
   .then(data=>{
@@ -73,9 +117,9 @@ fetch('proprietati.json')
     data.proprietati.filter(p=>p.disponibil).forEach(p=>{
       grid.innerHTML+=`
         <div onclick="window.location='contact.html'" style="background:#112240;border:1px solid rgba(201,168,76,.25);padding:1.5rem;border-radius:4px;cursor:pointer;">
-          <div style="font-size:.6rem;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:.5rem;">${p.tip} · ${p.locatie}</div>
+          <div style="font-size:.6rem;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:.5rem;">${p.tip_proprietate} · ${p.locatie}</div>
           <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff;margin-bottom:.8rem;">${p.titlu}</h2>
-          ${p.imagine ? `<img src="${p.imagine}" style="width:100%;height:160px;object-fit:cover;border-radius:4px;margin-bottom:.8rem;">` : ''}
+          ${makeCarousel(p.galerie, p.imagine)}
           <div style="font-size:.75rem;color:rgba(232,224,208,.6);margin-bottom:1rem;line-height:1.7;">${p.descriere}</div>
           <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(201,168,76,.2);padding-top:1rem;margin-top:.5rem;">
             <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#c9a84c;">${p.pret}</div>
