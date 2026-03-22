@@ -67,9 +67,9 @@ collections:
                 required: false
                 label_singular: "Fotografie"
                 fields:
-                  label: "Fotografie"
-                  name: "imagine"
-                  widget: "image"
+              - label: "Fotografie"
+                name: "imagine"
+                widget: "image"
               - label: "Descriere"
                 name: "descriere"
                 widget: "text"
