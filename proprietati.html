@@ -26,7 +26,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .ph h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;margin-bottom:.4rem}
 .ph p{color:var(--m);font-size:.82rem;font-weight:300}
 .main{flex:1;padding:5rem 6%}
-.carousel{position:relative;width:100%;height:400px;margin-bottom:1rem;border-radius:4px;overflow:hidden}
+.carousel{position:relative;width:100%;height:400px;margin-bottom:1rem;border-radius:4px;overflow:hidden;cursor:zoom-in}
 .carousel img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
 .carousel img.active{opacity:1}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);color:#fff;border:none;padding:8px 12px;cursor:pointer;z-index:2;font-size:1rem}
@@ -36,6 +36,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer}
 .dot.active{background:#fff}
 .prop-card{background:#112240;border:1px solid rgba(201,168,76,.25);padding:1.5rem;border-radius:4px;cursor:pointer;}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:9999;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:4px}
+.lightbox-close{position:absolute;top:20px;right:30px;color:#fff;font-size:2.5rem;cursor:pointer;z-index:10000}
+.lightbox-prev{position:absolute;left:20px;color:#fff;font-size:3rem;cursor:pointer;background:rgba(0,0,0,.3);padding:0 15px;border-radius:4px}
+.lightbox-next{position:absolute;right:20px;color:#fff;font-size:3rem;cursor:pointer;background:rgba(0,0,0,.3);padding:0 15px;border-radius:4px}
 footer{background:var(--navy);padding:3.5rem 6% 2rem;border-top:1px solid rgba(201,168,76,.25)}
 .fg2{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
 .fl{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.4rem;letter-spacing:3px;text-decoration:none;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -53,6 +59,12 @@ footer ul a:hover{color:var(--gold)}
 </style>
 </head>
 <body>
+<div class="lightbox" id="lightbox" onclick="closeLB()">
+  <span class="lightbox-close" onclick="closeLB()">&#10005;</span>
+  <span class="lightbox-prev" onclick="event.stopPropagation();lbMove(-1)">&#8249;</span>
+  <img id="lb-img" src="" onclick="event.stopPropagation()">
+  <span class="lightbox-next" onclick="event.stopPropagation();lbMove(1)">&#8250;</span>
+</div>
 <nav>
   <a href="index.html" class="logo">CONQUEST<span>IMOB</span></a>
   <ul class="nl" id="nav">
@@ -73,6 +85,32 @@ footer ul a:hover{color:var(--gold)}
 </div>
 <script>
 var carousels = {};
+var lbImgs = [];
+var lbCur = 0;
+
+function openLB(imgs, idx) {
+  lbImgs = imgs;
+  lbCur = idx;
+  document.getElementById('lb-img').src = lbImgs[lbCur];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLB() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lbMove(dir) {
+  lbCur = (lbCur + dir + lbImgs.length) % lbImgs.length;
+  document.getElementById('lb-img').src = lbImgs[lbCur];
+}
+
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Escape') closeLB();
+  if(e.key === 'ArrowRight') lbMove(1);
+  if(e.key === 'ArrowLeft') lbMove(-1);
+});
 
 function makeCarousel(photos, mainImg, cardId) {
   var all = [];
@@ -84,26 +122,22 @@ function makeCarousel(photos, mainImg, cardId) {
     }
   }
   if(all.length === 0) return '';
-  if(all.length === 1) return '<img src="'+all[0]+'" style="width:100%;height:200px;object-fit:cover;border-radius:4px;margin-bottom:1rem;">';
+  if(all.length === 1) return '<img src="'+all[0]+'" style="width:100%;height:400px;object-fit:cover;border-radius:4px;margin-bottom:1rem;cursor:zoom-in;" onclick="event.stopPropagation();openLB([\''+all[0]+'\'],0)">';
   
   carousels[cardId] = {imgs: all, cur: 0};
   
-  var html = '<div class="carousel" id="car_'+cardId+'" onclick="stopIt(event)">';
+  var html = '<div class="carousel" id="car_'+cardId+'" onclick="event.stopPropagation();openLB(carousels[\''+cardId+'\'].imgs, carousels[\''+cardId+'\'].cur)">';
   for(var j=0;j<all.length;j++){
     html += '<img src="'+all[j]+'" id="img_'+cardId+'_'+j+'" '+(j===0?'class="active"':'')+' >';
   }
-  html += '<button class="carousel-btn prev" onclick="stopIt(event);moveC(\''+cardId+'\',-1)">&#8249;</button>';
-  html += '<button class="carousel-btn next" onclick="stopIt(event);moveC(\''+cardId+'\',1)">&#8250;</button>';
+  html += '<button class="carousel-btn prev" onclick="event.stopPropagation();moveC(\''+cardId+'\',-1)">&#8249;</button>';
+  html += '<button class="carousel-btn next" onclick="event.stopPropagation();moveC(\''+cardId+'\',1)">&#8250;</button>';
   html += '<div class="dots">';
   for(var k=0;k<all.length;k++){
-    html += '<div class="dot'+(k===0?' active':'')+'" id="dot_'+cardId+'_'+k+'" onclick="stopIt(event);goToC(\''+cardId+'\','+k+')"></div>';
+    html += '<div class="dot'+(k===0?' active':'')+'" id="dot_'+cardId+'_'+k+'" onclick="event.stopPropagation();goToC(\''+cardId+'\','+k+')"></div>';
   }
   html += '</div></div>';
   return html;
-}
-
-function stopIt(e) {
-  e.stopPropagation();
 }
 
 function moveC(id, dir) {
