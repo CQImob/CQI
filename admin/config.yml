@@ -3,12 +3,9 @@ backend:
   repo: CQImob/CQI
   branch: main
   base_url: https://sveltia-cms-auth.vercel.app
-
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
-
 locale: ro
-
 collections:
   - name: "proprietati"
     label: "Proprietăți"
@@ -27,19 +24,16 @@ collections:
                 name: "titlu"
                 widget: "string"
                 hint: "Ex: Apartament 3 camere – Centrul Vechi"
-
               - label: "Preț"
                 name: "pret"
                 widget: "string"
                 hint: "Ex: €85.000 sau €600 / lună"
-
               - label: "Tip tranzacție"
                 name: "tranzactie"
                 widget: "select"
                 options:
                   - { label: "De vânzare", value: "vanzare" }
                   - { label: "De închiriat", value: "inchiriat" }
-
               - label: "Tip proprietate"
                 name: "tip"
                 widget: "select"
@@ -48,7 +42,6 @@ collections:
                   - { label: "Casă / Vilă", value: "casa" }
                   - { label: "Teren", value: "teren" }
                   - { label: "Spațiu comercial", value: "comercial" }
-
               - label: "Număr camere"
                 name: "camere"
                 widget: "number"
@@ -56,32 +49,35 @@ collections:
                 min: 0
                 max: 20
                 default: 0
-
               - label: "Suprafață"
                 name: "suprafata"
                 widget: "string"
                 hint: "Ex: 85 mp"
-
               - label: "Locație"
                 name: "locatie"
                 widget: "string"
                 hint: "Ex: Brașov, Centrul Vechi"
-
               - label: "Imagine principală"
                 name: "imagine"
                 widget: "image"
                 required: false
-
+              - label: "Galerie foto"
+                name: "galerie"
+                widget: "list"
+                required: false
+                label_singular: "Fotografie"
+                field:
+                  label: "Fotografie"
+                  name: "imagine"
+                  widget: "image"
               - label: "Descriere"
                 name: "descriere"
                 widget: "text"
                 required: false
-
               - label: "Proprietate promovată"
                 name: "featured"
                 widget: "boolean"
                 default: false
-
               - label: "Disponibil"
                 name: "disponibil"
                 widget: "boolean"
