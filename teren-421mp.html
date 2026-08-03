@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teren 421 mp - PUZ Turistic - Maierus | CONQUEST IMOB</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0d1b2e;--mid:#112240;--g:linear-gradient(135deg,#c9a84c 0%,#f5d98b 40%,#e8c15a 60%,#b8922e 100%);--gold:#c9a84c;--w:#e8e0d0;--m:rgba(232,224,208,.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;color:var(--w);background:var(--navy);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:70px;background:rgba(13,27,46,.97);border-bottom:1px solid rgba(201,168,76,.25)}
+.logo{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5rem;letter-spacing:3px;text-decoration:none;background:var(--g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo span{display:block;font-size:.52rem;font-weight:600;letter-spacing:6px;color:var(--gold);-webkit-text-fill-color:var(--gold);text-align:center}
+.nl{display:flex;gap:2rem;list-style:none;align-items:center}
+.nl a{font-size:.67rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--m);text-decoration:none}
+.nl a:hover{color:var(--gold)}
+.nc{border:1px solid var(--gold)!important;padding:8px 20px;color:var(--gold)!important}
+.hero{margin-top:70px;background:var(--mid);padding:2.5rem 6%}
+.bc{display:flex;gap:.5rem;font-size:.67rem;color:var(--m);margin-bottom:1rem}
+.bc a{color:var(--m);text-decoration:none}.bc a:hover{color:var(--gold)}
+.tag{font-size:.6rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:.5rem}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.6rem);color:#fff;margin-bottom:.5rem}
+.price{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-bottom:1.5rem}
+.specs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin-bottom:2rem}
+.spec{background:rgba(0,0,0,.2);border:1px solid rgba(201,168,76,.2);padding:1rem}
+.spec-l{font-size:.6rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem}
+.spec-v{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff}
+
+/* SLIDER */
+.slider-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#0a1520}
+.slider-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
+.slider-wrap img.active{opacity:1}
+.slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(13,27,46,.7);border:1px solid rgba(201,168,76,.4);color:var(--gold);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;font-size:1rem;transition:background .2s}
+.slider-btn:hover{background:rgba(201,168,76,.2)}
+.slider-btn.prev{left:10px}
+.slider-btn.next{right:10px}
+.slider-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5}
+.slider-dots span{width:7px;height:7px;border-radius:50%;background:rgba(232,224,208,.4);cursor:pointer;transition:background .2s}
+.slider-dots span.active{background:var(--gold)}
+.slider-3d-btn{display:block;background:var(--g);color:#0d1b2e;font-weight:700;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:13px;text-align:center;text-decoration:none;margin-bottom:1rem}
+
+.content{padding:3rem 6%;display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:768px){.content{grid-template-columns:1fr}.nl{display:none}}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(201,168,76,.3)}
+.desc{font-size:.82rem;color:var(--m);line-height:1.9}
+.render-box{width:100%;height:320px;border:1px solid rgba(201,168,76,.2);position:relative;overflow:hidden;border-radius:4px;background:#182810}
+.render-box canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important;display:block}
+.rlabel{position:absolute;bottom:10px;left:12px;font-size:7px;letter-spacing:2px;color:rgba(201,168,76,.6);text-transform:uppercase;pointer-events:none;z-index:2}
+.rhint{position:absolute;top:10px;right:12px;font-size:7px;color:rgba(232,224,208,.3);pointer-events:none;z-index:2}
+.cta-box{background:var(--mid);border:1px solid rgba(201,168,76,.3);padding:2rem;margin:0 6% 3rem;text-align:center}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;margin-bottom:1rem}
+.cta-btn{display:inline-block;background:var(--g);color:#0d1b2e;font-weight:700;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:14px 32px;text-decoration:none;margin:0 .5rem}
+.cu-note{background:rgba(0,0,0,.15);border-left:3px solid var(--gold);padding:1rem 1.5rem;margin-top:1.5rem;font-size:.78rem;color:var(--m);line-height:1.8}
+footer{background:var(--navy);padding:2rem 6%;border-top:1px solid rgba(201,168,76,.2);text-align:center;font-size:.72rem;color:var(--m)}
+.fwa{position:fixed;bottom:28px;right:28px;z-index:999;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1a7a40,#22c55e);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(34,197,94,.4);text-decoration:none;font-size:1.4rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">CONQUEST<span>IMOB</span></a>
+  <ul class="nl">
+    <li><a href="index.html">Acasa</a></li>
+    <li><a href="proprietati.html">Proprietati</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="tel:+40721263818" class="nc">Suna acum</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="bc"><a href="index.html">Acasa</a><span>/</span><a href="proprietati.html">Proprietati</a><span>/</span><span>Teren 421 mp Maierus</span></div>
+  <div class="tag">TEREN INTRAVILAN · REPREZENTARE EXCLUSIVA · CONQUEST IMOB</div>
+  <h1>Teren Intravilan 421 mp<br>PUZ Turistic · Maieruș, Brașov</h1>
+  <div class="price">EUR 13.893 <span style="font-size:1rem;color:var(--m)">· 33 €/mp</span></div>
+
+  <!-- SLIDER -->
+  <div class="slider-wrap" id="slider">
+    <img src="images/uploads/image 100600 teren 1.jpg" class="active" alt="Teren 421mp Maierus - vedere vale">
+    <img src="images/uploads/image 100600 teren 2.jpg" alt="Teren 421mp Maierus - DN13">
+    <img src="images/uploads/image 100600 teren 3.jpg" alt="Teren 421mp Maierus - vedere teren">
+    <img src="images/uploads/image 100600 satelit FINAL.jpg" alt="Teren 421mp Maierus - plan cadastral">
+    <img src="images/uploads/image 100600 satelit 2.jpg" alt="Teren 421mp Maierus - vedere satelit">
+    <button class="slider-btn prev" onclick="slide(-1)">&#8249;</button>
+    <button class="slider-btn next" onclick="slide(1)">&#8250;</button>
+    <div class="slider-dots" id="dots"></div>
+  </div>
+
+  <a href="#randare3d" class="slider-3d-btn" style="margin-top:.75rem">VEZI PREZENTAREA 3D INTERACTIVĂ</a>
+
+  <div class="specs-grid">
+    <div class="spec"><div class="spec-l">Suprafata</div><div class="spec-v">421 mp</div></div>
+    <div class="spec"><div class="spec-l">La sol (POT 25%)</div><div class="spec-v">~105 mp</div></div>
+    <div class="spec"><div class="spec-l">Regim inaltime</div><div class="spec-v">P+1+M</div></div>
+    <div class="spec"><div class="spec-l">Supraf. desfasurata</div><div class="spec-v">~315 mp</div></div>
+    <div class="spec"><div class="spec-l">POT / CUT</div><div class="spec-v">25% / 0,75</div></div>
+    <div class="spec"><div class="spec-l">Utilitati</div><div class="spec-v">La hotar</div></div>
+    <div class="spec"><div class="spec-l">Front stradal</div><div class="spec-v">15 m</div></div>
+    <div class="spec"><div class="spec-l">Acces</div><div class="spec-v">DN13 direct</div></div>
+  </div>
+</div>
+
+<div class="content">
+  <div>
+    <div class="section-title">Descriere proprietate</div>
+    <div class="desc">
+      421 de metri pătrați.<br>
+      Pentru unii, doar o suprafață.<br>
+      Pentru alții, începutul unui loc în care vor reveni mereu.<br><br>
+
+      În Valea Măierușului, liniștea nu este un lux. Este parte din peisaj.<br><br>
+
+      Dealuri împădurite, aer curat și natură autentică îți oferă ceea ce găsești tot mai greu: spațiu.<br><br>
+
+      <span style="color:var(--gold)">Spațiu să construiești.<br>
+      Spațiu să respiri.<br>
+      Spațiu să încetinești.</span><br><br>
+
+      Acesta este ultimul lot disponibil dintr-un concept de sat de vacanță — o oportunitate care apare rar și, de regulă, nu rămâne disponibilă prea mult timp.<br><br>
+
+      Fie că îți imaginezi o casă de vacanță, o pensiune boutique, sau propriul refugiu în mijlocul naturii, aici ai cadrul potrivit pentru a transforma un plan într-o realitate.<br><br>
+
+      <em>Unele proprietăți se cumpără pentru profit.<br>
+      Altele, pentru felul în care te fac să te simți.</em>
+    </div>
+    <div class="cu-note">
+      ✓ PUZ Turistic aprobat · HCL 28/09.06.2010<br>
+      ✓ CF 100600 Maieruș · Cad 100600<br>
+      ✓ Intravilan · curți-construcții<br>
+      ✓ Materiale admise: beton-armat, BCA, cărămidă, lemn<br>
+      ✓ Acoperiș: șarpantă cu țiglă ceramică<br>
+      ✓ Comision 0% pentru cumpărător<br>
+      ✓ 30 de minute de Brașov
+    </div>
+  </div>
+  <div id="randare3d">
+    <div class="section-title">Randare conceptuală · Cabană Rustică</div>
+    <div class="render-box" id="rb">
+      <canvas id="c"></canvas>
+      <div class="rlabel">421 mp · P+1+M · Cabana rustica</div>
+      <div class="rhint">↔ Rotire</div>
+    </div>
+    <div style="font-size:.7rem;color:rgba(232,224,208,.3);margin-top:.5rem">* Randare conceptuală · respectă indicatorii din CU</div>
+  </div>
+</div>
+
+<div class="cta-box">
+  <div class="cta-title">Interesat de această proprietate?</div>
+  <p style="font-size:.8rem;color:var(--m);margin-bottom:1.5rem">Contactați-ne pentru vizionare și informații suplimentare</p>
+  <a href="tel:+40721263818" class="cta-btn">Sună: 0721 263 818</a>
+  <a href="contact.html" class="cta-btn" style="background:transparent;border:1px solid var(--gold);color:var(--gold)">Trimite mesaj</a>
+</div>
+
+<footer>© 2025 Conquest Imob · Iulia Alexe – Broker imobiliar · 0721 263 818</footer>
+<a href="https://wa.me/40721263818" class="fwa">💬</a>
+
+<script>
+// SLIDER
+var imgs = document.querySelectorAll('#slider img');
+var dotsWrap = document.getElementById('dots');
+var cur = 0;
+imgs.forEach(function(_, i) {
+  var d = document.createElement('span');
+  if(i===0) d.className='active';
+  d.onclick = function(){ goTo(i); };
+  dotsWrap.appendChild(d);
+});
+function goTo(n) {
+  imgs[cur].classList.remove('active');
+  dotsWrap.children[cur].classList.remove('active');
+  cur = (n + imgs.length) % imgs.length;
+  imgs[cur].classList.add('active');
+  dotsWrap.children[cur].classList.add('active');
+}
+function slide(dir){ goTo(cur+dir); }
+setInterval(function(){ slide(1); }, 5000);
+
+// THREE.JS
+function loadThree(callback) {
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
+  s.onload = function() { setTimeout(callback, 500); };
+  s.onerror = function() {
+    var s2 = document.createElement('script');
+    s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    s2.onload = function() { setTimeout(callback, 500); };
+    document.head.appendChild(s2);
+  };
+  document.head.appendChild(s);
+}
+
+function initScene() {
+  var rb = document.getElementById('rb');
+  var canvas = document.getElementById('c');
+  if (!rb || !canvas || typeof THREE === 'undefined') return;
+  var W = rb.offsetWidth || 400;
+  var H = 320;
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x182810);
+  scene.fog = new THREE.FogExp2(0x182810, 0.014);
+  var camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 200);
+  scene.add(new THREE.AmbientLight(0xfff0dd, 0.5));
+  var sun = new THREE.DirectionalLight(0xfffae8, 2.2);
+  sun.position.set(14, 20, 12);
+  sun.castShadow = true;
+  scene.add(sun);
+  function ml(c) { return new THREE.MeshLambertMaterial({ color: c }); }
+  function mlT(c, o) { return new THREE.MeshLambertMaterial({ color: c, transparent: true, opacity: o }); }
+  function bx(w, h, d, mat, x, y, z) {
+    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+    m.position.set(x, y, z);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    scene.add(m);
+    return m;
+  }
+  var mPl = ml(0xC8A870), mPlD = ml(0xB09458), mWood = ml(0x5C3218), mWoodL = ml(0x7A4828);
+  var mRoof = ml(0x8B3A1A), mRoofD = ml(0x6A2810), mGl = mlT(0xBBDDEE, 0.45);
+  var mSt = ml(0x9A8870), mGr = ml(0x304820);
+  var gr = new THREE.Mesh(new THREE.PlaneGeometry(26, 20), mGr);
+  gr.rotation.x = -Math.PI / 2;
+  gr.receiveShadow = true;
+  scene.add(gr);
+  bx(8.5, 0.55, 6.2, mSt, 0, 0.28, 0);
+  bx(8.5, 3.0, 6.2, mPl, 0, 2.05, 0);
+  bx(2.5, 3.0, 6.2, mSt, -3.0, 2.05, 0);
+  bx(2.2, 1.8, 0.08, mGl, -1.0, 2.2, 3.12);
+  bx(1.2, 1.2, 0.08, mGl, 3.0, 2.0, 3.12);
+  bx(1.0, 2.3, 0.15, mWood, 0, 1.25, 3.16);
+  bx(5.5, 0.14, 2.2, mWoodL, 0, 0.07, 4.0);
+  [-2.5, 0, 2.5].forEach(function(x) { bx(0.18, 2.8, 0.18, mWood, x, 1.47, 5.0); });
+  bx(5.5, 0.18, 0.18, mWood, 0, 2.95, 5.0);
+  bx(8.5, 2.5, 6.2, mPl, 0, 4.75, 0);
+  bx(2.5, 2.5, 6.2, mSt, -3.0, 4.75, 0);
+  bx(1.8, 1.4, 0.08, mGl, -2.0, 4.75, 3.12);
+  bx(1.8, 1.4, 0.08, mGl, 1.8, 4.75, 3.12);
+  bx(5.5, 0.12, 1.4, mWoodL, 0, 6.1, 3.6);
+  bx(7.0, 1.6, 5.2, mPlD, 0, 7.55, -0.2);
+  var rg = new THREE.Mesh(new THREE.CylinderGeometry(0, 5.8, 3.2, 4), mRoof);
+  rg.position.set(0, 9.65, 0);
+  rg.rotation.y = Math.PI / 4;
+  rg.castShadow = true;
+  scene.add(rg);
+  bx(9.2, 0.2, 7.0, mRoofD, 0, 8.1, 0);
+  bx(0.6, 1.8, 0.6, mSt, 1.8, 10.2, -0.4);
+  function tree(x, z, s) {
+    var tk = new THREE.Mesh(new THREE.CylinderGeometry(0.08*s,0.13*s,1.1*s,6), ml(0x4A2A0A));
+    tk.position.set(x, 0.55*s, z);
+    scene.add(tk);
+    [[1.8,0.82,0x1A5212],[1.25,0.70,0x206618],[0.72,0.56,0x287A1E]].forEach(function(a){
+      var f = new THREE.Mesh(new THREE.ConeGeometry(a[1]*s,0.80*s,7), ml(a[2]));
+      f.position.set(x, a[0]*s, z);
+      scene.add(f);
+    });
+  }
+  [[-8,5],[-8,-3],[7,-4],[8,3],[4,-6],[-4,7],[3,6]].forEach(function(a){ tree(a[0],a[1],0.7); });
+  var az=0.5, pol=0.42, rad=20, drag=false, px=0, py=0;
+  var tgt = new THREE.Vector3(0,3.5,0);
+  function updCam() {
+    camera.position.x = tgt.x + rad*Math.sin(pol)*Math.sin(az);
+    camera.position.y = tgt.y + rad*Math.cos(pol);
+    camera.position.z = tgt.z + rad*Math.sin(pol)*Math.cos(az);
+    camera.lookAt(tgt);
+  }
+  updCam();
+  canvas.addEventListener('mousedown', function(e){ drag=true; px=e.clientX; py=e.clientY; });
+  canvas.addEventListener('touchstart', function(e){ drag=true; px=e.touches[0].clientX; py=e.touches[0].clientY; },{passive:true});
+  window.addEventListener('mouseup', function(){ drag=false; });
+  window.addEventListener('touchend', function(){ drag=false; });
+  canvas.addEventListener('mousemove', function(e){
+    if(!drag) return;
+    az -= (e.clientX-px)*0.008;
+    pol = Math.max(0.1, Math.min(1.4, pol-(e.clientY-py)*0.006));
+    px=e.clientX; py=e.clientY; updCam();
+  });
+  canvas.addEventListener('touchmove', function(e){
+    if(!drag) return;
+    az -= (e.touches[0].clientX-px)*0.008;
+    pol = Math.max(0.1, Math.min(1.4, pol-(e.touches[0].clientY-py)*0.006));
+    px=e.touches[0].clientX; py=e.touches[0].clientY; updCam();
+  },{passive:true});
+  window.addEventListener('resize', function(){
+    W = rb.offsetWidth||400;
+    renderer.setSize(W,H);
+    camera.aspect=W/H;
+    camera.updateProjectionMatrix();
+  });
+  function animate(){ requestAnimationFrame(animate); az+=0.003; updCam(); renderer.render(scene,camera); }
+  animate();
+}
+window.onload = function(){ loadThree(initScene); };
+</script>
+</body>
+</html>
